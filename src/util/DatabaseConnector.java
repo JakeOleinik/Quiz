@@ -23,6 +23,7 @@ public enum DatabaseConnector {
 	/**
 	 * Private constructor for Singleton design pattern
 	 */
+	private DatabaseConnector() {
 		con = makeConnection(DATABASE_PROPERTIES_FILENAME);
 	}
 	
@@ -66,6 +67,7 @@ public enum DatabaseConnector {
 	/**
 	 * Load all properties from a file to a properties object
 	 * @param propFile Name of the file holding all the properties
+	 * @return An initialised properties object, based on the given file.
 	 */
 	private Properties loadPropertiesFromFile(String propFile) {
 		Properties properties = new Properties();			

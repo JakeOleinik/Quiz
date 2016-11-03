@@ -68,10 +68,6 @@ public class MainProgram {
 		
 		while (true) {
 			showMenu();
-		}
-		
-		
-		
+		}				
 	}
-
 }

@@ -7,7 +7,7 @@ import persistency.PersonMapper;
 public class MainProgram {
 
 	public static void main(String[] args) {
-		PersonMapper pm = PersonMapper.UNIQUEINSTANCE;
+		PersonMapper pm = PersonMapper.INSTANCE;
 		
 		// get all person names
 		List<String> names = pm.getPersonNames();

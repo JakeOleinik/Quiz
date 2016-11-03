@@ -15,7 +15,7 @@ import java.util.Properties;
  *
  */
 public enum DatabaseConnector {
-	UNIQUEINSTANCE;
+	INSTANCE;
 	private static final String DATABASE_PROPERTIES_FILENAME = "database.properties";
 
 	private Connection con;

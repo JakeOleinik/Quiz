@@ -8,14 +8,11 @@ import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import util.Database;
-import entities.Person;
-
+import util.DatabaseConnector;
 
 public enum PersonMapper {
-
 	//private static PersonMapper uniqueInstance = null;
-	UNIQUEINSTANCE;
+	INSTANCE;
 
 	/**
 	 * Private constructor for Singleton design pattern
@@ -33,7 +30,7 @@ public enum PersonMapper {
 	public List<String> getPersonNames() {
 		List<String> names = new LinkedList<String>();
 		try {
-			Statement stmt = Database.UNIQUEINSTANCE.getConnection().createStatement();
+			Statement stmt = DatabaseConnector.INSTANCE.getConnection().createStatement();
 			ResultSet rset = stmt.executeQuery("SELECT firstName FROM People ORDER BY firstName");
 			while (rset.next()) {
 				names.add(rset.getString(1)); // scroll trough the data and fill
@@ -46,5 +43,4 @@ public enum PersonMapper {
 		}
 		return names;
 	}
-	
 }

@@ -1,9 +1,10 @@
+package entities;
+
 import java.util.*;
 
 public class Team {
-
-	Collection<Person> members;
-	Collection<QuizReport> quizReports;
+	private Collection<Person> members;
+	private Collection<QuizReport> quizReports;
 	private String name;
 
 	public String getName() {
@@ -22,5 +23,4 @@ public class Team {
 		// TODO - implement Team.getMembers
 		throw new UnsupportedOperationException();
 	}
-
 }

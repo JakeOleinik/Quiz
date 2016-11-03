@@ -1,12 +1,14 @@
+package entities;
+
 import java.util.*;
+import java.time.LocalDate;
 
 public class Quiz {
-
-	Collection<Round> rounds;
-	Collection<QuizReport> quizReports;
+	private Collection<Round> rounds;
+	private Collection<QuizReport> quizReports;
 	private int currentRoundIdx;
 	private String location;
-	private DateTime date;
+	private LocalDate date;
 
 	public void getNextQuestion() {
 		// TODO - implement Quiz.getNextQuestion
@@ -35,7 +37,7 @@ public class Quiz {
 		this.location = location;
 	}
 
-	public DateTime getDate() {
+	public LocalDate getDate() {
 		return this.date;
 	}
 
@@ -43,7 +45,7 @@ public class Quiz {
 	 * 
 	 * @param date
 	 */
-	public void setDate(DateTime date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

@@ -1,8 +1,10 @@
+package entities;
+
+
 import java.util.*;
 
 public class Season {
-
-	Collection<QuizReport> quizReports;
+	private Collection<QuizReport> quizReports;
 	private String name;
 
 	public String getName() {
@@ -16,5 +18,4 @@ public class Season {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 }

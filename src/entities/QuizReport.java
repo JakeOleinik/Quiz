@@ -1,7 +1,10 @@
-public class QuizReport {
+package entities;
 
-	Quiz quiz;
-	Team team;
+import java.util.ArrayList;
+
+public class QuizReport {
+	private Quiz quiz;
+	private Team team;
 	private ArrayList roundScores;
 
 	/**
@@ -9,7 +12,7 @@ public class QuizReport {
 	 * @param team
 	 * @param quiz
 	 */
-	public void quizReport(Team team, Quiz quiz) {
+	public QuizReport(Team team, Quiz quiz) {
 		// TODO - implement QuizReport.quizReport
 		throw new UnsupportedOperationException();
 	}

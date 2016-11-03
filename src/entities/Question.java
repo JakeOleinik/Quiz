@@ -1,9 +1,10 @@
+package entities;
+
 import java.util.*;
 
 public class Question {
-
-	Collection<Picture> pictures;
-	Collection<Answer> answers;
+	private Collection<Picture> pictures;
+	private Collection<Answer> answers;
 	private String text;
 	private String explanation;
 	private int mark;

@@ -1,11 +1,14 @@
-public class Person {
+package entities;
 
-	Team team;
+import java.time.LocalDate;
+
+public class Person {
+	private Team team;
 	private String lastName;
 	private String firstName;
 	private String phone;
 	private String email;
-	private DateTime dateOfBirth;
+	private LocalDate dateOfBirth;
 
 	/**
 	 * 
@@ -69,7 +72,7 @@ public class Person {
 		this.email = email;
 	}
 
-	public DateTime getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return this.dateOfBirth;
 	}
 
@@ -77,8 +80,7 @@ public class Person {
 	 * 
 	 * @param dateOfBirth
 	 */
-	public void setDateOfBirth(DateTime dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-
 }

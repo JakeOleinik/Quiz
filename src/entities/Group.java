@@ -1,9 +1,10 @@
+package entities;
+
 import java.util.*;
 
 public class Group {
-
-	Collection<Person> members;
-	Collection<Team> teams;
+	private Collection<Person> members;
+	private Collection<Team> teams;
 	private String name;
 
 	/**
@@ -37,5 +38,4 @@ public class Group {
 	public String getName() {
 		return this.name;
 	}
-
 }

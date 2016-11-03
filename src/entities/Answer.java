@@ -1,5 +1,6 @@
-public class Answer {
+package entities;
 
+public class Answer {
 	private String text;
 	private boolean correct;
 
@@ -20,5 +21,4 @@ public class Answer {
 	public boolean isCorrect() {
 		return this.correct;
 	}
-
 }

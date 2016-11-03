@@ -1,8 +1,8 @@
+package entities;
+
 import java.util.*;
 
 public class Round {
-
-	Collection<Question> questions;
+	private Collection<Question> questions;
 	private String name;
-
 }

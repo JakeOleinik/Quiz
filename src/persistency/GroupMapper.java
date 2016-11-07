@@ -55,4 +55,23 @@ public enum GroupMapper {
 		}
 		return groups;
 	}
+	
+	public Group getGroupById(int groupId) {
+		String select = "SELECT id, name FROM Groups WHERE id = ?";
+		Group group = null;
+		try {
+			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(select);
+			prepstat.setInt(1, groupId);
+			ResultSet rset = prepstat.executeQuery();
+			if (rset.next()) {
+				group = new Group(rset.getInt("id"), rset.getString("name"));
+			}
+			rset.close();
+			prepstat.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return group;
+	}
 } 

@@ -38,7 +38,7 @@ public class MainProgram {
 				break;
 				
 			case CreateGroup:
-				
+				ActionHandler.createGroup();
 				break;
 				
 			case AddPersonToTeam:

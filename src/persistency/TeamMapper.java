@@ -20,7 +20,7 @@ public enum TeamMapper {
 	
 	public int createTeam(Team team) {
 		int id = -1;
-		String sql = "INSERT INTO Teams (name, groupId) VALUES (?)";
+		String sql = "INSERT INTO Teams (name, groupId) VALUES (?,?)";
 		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			pstmt.setString(1, team.getName());
 			pstmt.setInt(2, team.getGroupId());

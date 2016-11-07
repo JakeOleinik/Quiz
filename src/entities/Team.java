@@ -38,6 +38,10 @@ public class Team {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
 
 	public ArrayList<Person> getMembers() {
 		// TODO - implement Team.getMembers

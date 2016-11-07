@@ -6,8 +6,8 @@ import entities.Group;
 
 import java.util.List;
 
-import persistency.GroupMapper;
-import entities.Group;
+import persistency.*;
+import entities.*;
 
 public class ActionHandler {
 	
@@ -15,17 +15,22 @@ public class ActionHandler {
 
 	public static void createGroup() {
 		System.out.print("Name: ");
-		String name = reader.next();
+		String name = reader.nextLine();
 		Group group = new Group(name);
 		GroupMapper.INSTANCE.createGroup(group);
-		System.out.println("Created group with id="+group.getId());
+		System.out.println("Created group '"+group.getName()+"' with id="+group.getId());
 	}
 	
 	public static void createTeam() {
 		System.out.print("Name: ");
-		String name = reader.next();
+		String name = reader.nextLine();
 		List<Group> groups = GroupMapper.INSTANCE.getGroups();
 		System.out.println("Available groups:");
 		System.out.println(groups);
+		System.out.print("Enter group id: ");
+		int groupId = reader.nextInt();
+		Team team = new Team(name, groupId);
+		TeamMapper.INSTANCE.createTeam(team);
+		System.out.println("Created team '"+team.getName()+"' with id="+team.getId());
 	}
 }

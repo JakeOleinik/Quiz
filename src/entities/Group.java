@@ -52,10 +52,6 @@ public class Group {
 		this.id = id;
 	}
 	
-	public int getId() {
-		return this.id;
-	}
-	
 	public String toString() {
 		return "" + this.id + ": " + this.name;
 	}

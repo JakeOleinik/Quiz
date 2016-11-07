@@ -93,7 +93,7 @@ public enum PersonMapper {
 			pstmt.setString(3, person.getPhone());
 			pstmt.setString(4, person.getEmail());
 			pstmt.setDate(5, Date.valueOf(person.getDateOfBirth()));
-			pstmt.setInt(6, person.getGroup().getId()));
+			pstmt.setInt(6, person.getGroup().getId());
 			pstmt.setInt(7, person.getId());
 			 // executeUpdate() should be called to change something in the database
 			rowsAffected = pstmt.executeUpdate();

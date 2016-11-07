@@ -30,7 +30,7 @@ public enum PersonMapper {
 	 */
 	public int createPerson(Person person) {
 		int id = -1;
-		String sql = "INSERT INTO People (lastName, firstName, phone, email, dateOfBirth, groupId) VALUES (?,?)";
+		String sql = "INSERT INTO People (lastName, firstName, phone, email, dateOfBirth, groupId) VALUES (?,?,?,?,?,?)";
 		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			pstmt.setString(1, person.getLastName());
 			pstmt.setString(2, person.getFirstName());

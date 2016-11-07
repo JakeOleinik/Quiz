@@ -30,7 +30,7 @@ public class MainProgram {
 		}
 		switch(Action.values()[n]) {
 			case CreatePerson:
-				
+				ActionHandler.createPerson();
 				break;
 			
 			case CreateTeam:

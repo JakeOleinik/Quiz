@@ -3,8 +3,8 @@ package logic;
 import java.util.Scanner;
 import java.util.List;
 
-
 import persistency.GroupMapper;
+import entities.Group;
 
 public class ActionHandler {
 	
@@ -13,8 +13,9 @@ public class ActionHandler {
 	public static void createGroup() {
 		System.out.print("Name: ");
 		String name = reader.next();
-		int id = GroupMapper.INSTANCE.createGroup(name);
-		System.out.println("Created group with id="+id);
+		Group group = new Group(name);
+		GroupMapper.INSTANCE.createGroup(group);
+		System.out.println("Created group with id="+group.getId());
 	}
 	
 	public static void createTeam() {

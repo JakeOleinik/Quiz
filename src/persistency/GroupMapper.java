@@ -33,10 +33,10 @@ public enum GroupMapper {
 					}
 				}
 			}
+			group.setId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		group.setId(id);
 		return id;
 	}
 	

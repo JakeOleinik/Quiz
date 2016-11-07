@@ -7,18 +7,21 @@ public class Team {
 	private Collection<QuizReport> quizReports;
 	private String name;
 	private int id;
+	private int groupId;
 
 	public String getName() {
 		return this.name;
 	}
 	
-	public Team(int id, String name) {
+	public Team(int id, String name, int groupId) {
 		this.id = id;
 		this.name = name;
+		this.groupId = groupId;
 	}
 	
-	public Team(String name) {
+	public Team(String name, int groupId) {
 		this.name = name;
+		this.groupId = groupId;
 	}
 	/**
 	 * 
@@ -26,6 +29,14 @@ public class Team {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getGroupId() {
+		return this.groupId;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public ArrayList<Person> getMembers() {

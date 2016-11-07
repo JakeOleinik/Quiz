@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 
 import util.DatabaseConnector;
 
+import entities.Team;
+
 public enum TeamMapper {
 	INSTANCE;
 	
@@ -16,12 +18,12 @@ public enum TeamMapper {
 		
 	}
 	
-	public int createTeam(String name, int groupId) {
+	public int createTeam(Team team) {
 		int id = -1;
 		String sql = "INSERT INTO Teams (name, groupId) VALUES (?)";
 		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-			pstmt.setString(1, name);
-			pstmt.setInt(2, groupId);
+			pstmt.setString(1, team.getName());
+			pstmt.setInt(2, team.getGroupId());
 			 // executeUpdate() should be called to change something in the database
 			int rowsAffected = pstmt.executeUpdate();
 			if (rowsAffected > 0) {
@@ -32,6 +34,7 @@ public enum TeamMapper {
 					}
 				}
 			}
+			team.setId(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}		

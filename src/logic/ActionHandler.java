@@ -1,14 +1,15 @@
 package logic;
 
+import java.util.List;
 import java.util.Scanner;
 
 import entities.Group;
-
-import java.time.LocalDate;
-import java.util.List;
-
-import persistency.*;
-import entities.*;
+import entities.IHasId;
+import entities.Person;
+import entities.Team;
+import persistency.GroupMapper;
+import persistency.PersonMapper;
+import persistency.TeamMapper;
 
 public class ActionHandler {
 	

@@ -2,26 +2,26 @@ package entities;
 
 import java.util.*;
 
-public class Team {
+public class Team implements IHasId {
 	private Collection<Person> members;
 	private Collection<QuizReport> quizReports;
 	private String name;
 	private int id;
-	private int groupId;
+	private Group group;
 
 	public String getName() {
 		return this.name;
 	}
 	
-	public Team(int id, String name, int groupId) {
+	public Team(int id, String name, Group group) {
 		this.id = id;
 		this.name = name;
-		this.groupId = groupId;
+		this.group = group;
 	}
 	
-	public Team(String name, int groupId) {
+	public Team(String name, Group group) {
 		this.name = name;
-		this.groupId = groupId;
+		this.group = group;
 	}
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class Team {
 	}
 	
 	public int getGroupId() {
-		return this.groupId;
+		return this.group.getId();
 	}
 	
 	public void setId(int id) {
@@ -46,5 +46,9 @@ public class Team {
 	public ArrayList<Person> getMembers() {
 		// TODO - implement Team.getMembers
 		throw new UnsupportedOperationException();
+	}
+	
+	public String toString() {
+		return "" + this.id + ": " + this.name;
 	}
 }

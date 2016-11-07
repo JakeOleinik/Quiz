@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import java.sql.PreparedStatement;
+import entities.Group;
 
 import util.DatabaseConnector;
 
@@ -16,11 +17,11 @@ public enum GroupMapper {
 		
 	}
 	
-	public int createGroup(String name) {
+	public int createGroup(Group group) {
 		int id = -1;
 		String sql = "INSERT INTO Groups (name) VALUES (?)";
 		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-			pstmt.setString(1, name);
+			pstmt.setString(1, group.getName());
 			
 			 // executeUpdate() should be called to change something in the database
 			int rowsAffected = pstmt.executeUpdate();
@@ -34,11 +35,12 @@ public enum GroupMapper {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
+		group.setId(id);
 		return id;
 	}
 	
-	public List<String> getGroupsByIdAndName() {
+	public List<String> getGroupIdsAndNames() {
 		List<String> groups = new LinkedList<String>();
 		try {
 			Statement stmt = DatabaseConnector.INSTANCE.getConnection().createStatement();

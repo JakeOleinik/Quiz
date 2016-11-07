@@ -6,11 +6,20 @@ public class Team {
 	private Collection<Person> members;
 	private Collection<QuizReport> quizReports;
 	private String name;
+	private int id;
 
 	public String getName() {
 		return this.name;
 	}
-
+	
+	public Team(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	public Team(String name) {
+		this.name = name;
+	}
 	/**
 	 * 
 	 * @param name

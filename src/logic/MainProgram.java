@@ -34,7 +34,7 @@ public class MainProgram {
 				break;
 			
 			case CreateTeam:
-				
+				ActionHandler.createTeam();
 				break;
 				
 			case CreateGroup:

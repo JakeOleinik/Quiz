@@ -1,6 +1,8 @@
 package logic;
 
 import java.util.Scanner;
+import java.util.List;
+
 
 import persistency.GroupMapper;
 
@@ -10,8 +12,16 @@ public class ActionHandler {
 
 	public static void createGroup() {
 		System.out.print("Name: ");
-		String name = reader.next(); // Scans the next token of the input as an int
+		String name = reader.next();
 		int id = GroupMapper.INSTANCE.createGroup(name);
 		System.out.println("Created group with id="+id);
+	}
+	
+	public static void createTeam() {
+		System.out.print("Name: ");
+		String name = reader.next();
+		List<String> groups = GroupMapper.INSTANCE.getGroupIdsAndNames();
+		System.out.println("Available groups:");
+		System.out.println(groups);
 	}
 }

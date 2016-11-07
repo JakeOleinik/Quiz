@@ -40,13 +40,13 @@ public enum GroupMapper {
 		return id;
 	}
 	
-	public List<String> getGroupIdsAndNames() {
-		List<String> groups = new LinkedList<String>();
+	public List<Group> getGroups() {
+		List<Group> groups = new LinkedList<Group>();
 		try {
 			Statement stmt = DatabaseConnector.INSTANCE.getConnection().createStatement();
 			ResultSet rset = stmt.executeQuery("SELECT id, name FROM Groups");
 			while (rset.next()) {
-				groups.add(rset.getString(1) + ": " + rset.getString(2)); // scroll trough the data and fill
+				groups.add(new Group(rset.getInt(1), rset.getString(2))); // scroll trough the data and fill
 			}
 			rset.close();
 			stmt.close();

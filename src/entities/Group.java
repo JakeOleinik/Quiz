@@ -51,4 +51,12 @@ public class Group {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public String toString() {
+		return "" + this.id + ": " + this.name;
+	}
 }

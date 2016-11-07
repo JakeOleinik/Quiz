@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import entities.Person;
 import util.DatabaseConnector;
 
 public enum PersonMapper {
@@ -21,7 +22,88 @@ public enum PersonMapper {
 		// private Constructor
 	}
 
-
+	
+	/**
+	 * Store a person in the database
+	 * 
+	 * @param person The Person object that needs to be stored
+	 */
+	public int createPerson(Person person) {
+		int id = -1;
+		String sql = "INSERT INTO People (lastName, firstName, phone, email, dateOfBirth, groupId) VALUES (?,?)";
+		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+			pstmt.setString(1, person.getLastName());
+			pstmt.setString(2, person.getFirstName());
+			pstmt.setString(3, person.getPhone());
+			pstmt.setString(4, person.getEmail());
+			pstmt.setDate(5, Date.valueOf(person.getDateOfBirth()));
+			pstmt.setInt(6, person.getGroup().getId());
+			 // executeUpdate() should be called to change something in the database
+			int rowsAffected = pstmt.executeUpdate();
+			if (rowsAffected > 0) {
+				ResultSet rs = pstmt.getGeneratedKeys();
+				if (rs != null) {
+					if (rs.next()) {
+						id = rs.getInt(1);
+					}
+				}
+			}
+			
+			person.setId(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	
+	/**
+	 * Delete a person from the database
+	 * 
+	 * @param id The id of the Person to be deleted
+	 * @return Number of rows affected (should be 1)
+	 * @throws SQLException
+	 */
+	public int deletePerson(Person person) throws SQLException {
+		int rowsAffected = 0;
+		String sql = "DELETE FROM People WHERE id = ?";
+		try {
+			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql);
+			prepstat.setInt(1, person.getId());
+			rowsAffected = prepstat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rowsAffected;
+	}
+	
+	
+	/**
+	 * Update the columns of a person in the database
+	 * 
+	 * @param person The Person object with the new data
+	 * @return Number of rows affected (should be 1)
+	 */
+	public int updatePerson(Person person) {
+		int rowsAffected = 0;
+		String sql = "UPDATE People SET lastName = ?, firstName = ?, phone = ?, email = ?, dateOfBirth = ?, groupId = ? WHERE id = ?";
+		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql)) {
+			pstmt.setString(1, person.getLastName());
+			pstmt.setString(2, person.getFirstName());
+			pstmt.setString(3, person.getPhone());
+			pstmt.setString(4, person.getEmail());
+			pstmt.setDate(5, Date.valueOf(person.getDateOfBirth()));
+			pstmt.setInt(6, person.getGroup().getId()));
+			pstmt.setInt(7, person.getId());
+			 // executeUpdate() should be called to change something in the database
+			rowsAffected = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rowsAffected;
+	}
+	
+	
 	/**
 	 * Get all person names
 	 * 
@@ -34,7 +116,7 @@ public enum PersonMapper {
 			ResultSet rset = stmt.executeQuery("SELECT firstName FROM People ORDER BY firstName");
 			while (rset.next()) {
 				names.add(rset.getString(1)); // scroll trough the data and fill
-												// the collection
+												// the coll11ection
 			}
 			rset.close();
 			stmt.close();

@@ -1,6 +1,9 @@
 package logic;
 
 import java.util.Scanner;
+
+import entities.Group;
+
 import java.util.List;
 
 import persistency.GroupMapper;
@@ -21,7 +24,7 @@ public class ActionHandler {
 	public static void createTeam() {
 		System.out.print("Name: ");
 		String name = reader.next();
-		List<String> groups = GroupMapper.INSTANCE.getGroupIdsAndNames();
+		List<Group> groups = GroupMapper.INSTANCE.getGroups();
 		System.out.println("Available groups:");
 		System.out.println(groups);
 	}

@@ -2,7 +2,7 @@ package entities;
 
 import java.util.*;
 
-public class Group {
+public class Group implements IHasId {
 	private Collection<Person> members;
 	private Collection<Team> teams;
 	private String name;

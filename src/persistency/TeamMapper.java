@@ -8,8 +8,9 @@ import java.util.List;
 import java.sql.PreparedStatement;
 
 import util.DatabaseConnector;
-
+import entities.Group;
 import entities.Team;
+import persistency.GroupMapper;
 
 public enum TeamMapper {
 	INSTANCE;
@@ -39,5 +40,21 @@ public enum TeamMapper {
 			e.printStackTrace();
 		}		
 		return id;
+	}
+	
+	public List<Team> getTeams() {
+		List<Team> teams = new LinkedList<Team>();
+		try {
+			Statement stmt = DatabaseConnector.INSTANCE.getConnection().createStatement();
+			ResultSet rset = stmt.executeQuery("SELECT id, name, groupId FROM Teams");
+			while (rset.next()) {
+				teams.add(new Team(rset.getInt(1), rset.getString(2), GroupMapper.INSTANCE.getGroupById(rset.getInt(3)))); // scroll trough the data and fill
+			}
+			rset.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teams;
 	}
 }

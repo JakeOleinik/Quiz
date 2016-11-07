@@ -4,10 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import entities.Group;
 import entities.Person;
 import util.DatabaseConnector;
 
@@ -86,7 +88,7 @@ public enum PersonMapper {
 	 */
 	public int updatePerson(Person person) {
 		int rowsAffected = 0;
-		String sql = "UPDATE People SET lastName = ?, firstName = ?, phone = ?, email = ?, dateOfBirth = ?, groupId = ? WHERE id = ?";
+		String sql = "UPDATE People SET lastName = ?, firstName = ?, phone = ?, email = ?, dateOfBirth = ?, groupId = ?, teamId = ? WHERE id = ?";
 		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql)) {
 			pstmt.setString(1, person.getLastName());
 			pstmt.setString(2, person.getFirstName());
@@ -94,13 +96,45 @@ public enum PersonMapper {
 			pstmt.setString(4, person.getEmail());
 			pstmt.setDate(5, Date.valueOf(person.getDateOfBirth()));
 			pstmt.setInt(6, person.getGroup().getId());
-			pstmt.setInt(7, person.getId());
+			pstmt.setInt(7, person.getTeam().getId());
+			pstmt.setInt(8, person.getId());
 			 // executeUpdate() should be called to change something in the database
 			rowsAffected = pstmt.executeUpdate();
+			System.out.println(""+rowsAffected);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return rowsAffected;
+	}
+	
+	public List<Person> getPeopleFromGroup(int groupId) {
+		List<Person> people = new LinkedList<Person>();
+		String select = "SELECT id, firstName, lastName, phone, email, dateOfBirth, teamId, groupId FROM People WHERE groupId = ?";
+		try {
+			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(select);
+			prepstat.setInt(1, groupId);
+			ResultSet rset = prepstat.executeQuery();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			
+			while (rset.next()) {
+				people.add(new Person(
+									rset.getInt("id"),
+									rset.getString("lastName"),
+									rset.getString("firstName"),
+									rset.getString("phone"),
+									rset.getString("email"),
+									formatter.format(rset.getDate("dateOfBirth").toLocalDate()),
+									GroupMapper.INSTANCE.getGroupById(rset.getInt("groupId"))
+				)); 
+			}
+			
+			rset.close();
+			prepstat.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return people;
 	}
 	
 	

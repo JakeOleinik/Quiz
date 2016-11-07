@@ -42,7 +42,7 @@ public class MainProgram {
 				break;
 				
 			case AddPersonToTeam:
-				
+				ActionHandler.addPersonToTeam();
 				break;
 				
 			case AddTeamToQuiz:

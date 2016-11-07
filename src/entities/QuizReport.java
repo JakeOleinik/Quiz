@@ -5,40 +5,48 @@ import java.util.ArrayList;
 public class QuizReport {
 	private Quiz quiz;
 	private Team team;
-	private ArrayList roundScores;
+	private ArrayList<Integer> roundScores;
+	private Season season;
 
-	/**
-	 * 
-	 * @param team
-	 * @param quiz
-	 */
-	public QuizReport(Team team, Quiz quiz) {
-		// TODO - implement QuizReport.quizReport
-		throw new UnsupportedOperationException();
+	public QuizReport(Team team, Quiz quiz, Season season) {
+		this.team = team;
+		this.quiz = quiz;
+		this.season = season;
+		season.addQuizReport(this);
 	}
 
 	public int getTotalScore() {
-		// TODO - implement QuizReport.getTotalScore
-		throw new UnsupportedOperationException();
+		int sum = 0;
+		for (int x : roundScores)
+			sum += x;
+		
+		return sum;
 	}
 
-	/**
-	 * 
-	 * @param roundIdx
-	 */
 	public int getRoundScore(int roundIdx) {
-		// TODO - implement QuizReport.getRoundScore
-		throw new UnsupportedOperationException();
+		return roundScores.get(roundIdx);
+	}
+	
+	public ArrayList<Integer> getRoundScores() {
+		return this.roundScores;
 	}
 
-	/**
-	 * 
-	 * @param roundIdx
-	 * @param amount
-	 */
 	public void incrementRoundScore(int roundIdx, int amount) {
-		// TODO - implement QuizReport.incrementRoundScore
-		throw new UnsupportedOperationException();
+		roundScores.set(roundIdx, roundScores.get(roundIdx));
 	}
-
+	
+	public Quiz getQuiz()
+	{
+		return this.quiz;
+	}
+	
+	public Team getTeam()
+	{
+		return this.team;
+	}
+	
+	public Season getSeason()
+	{
+		return this.season;
+	}
 }

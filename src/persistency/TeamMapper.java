@@ -1,15 +1,12 @@
 package persistency;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
-import java.util.List;
-import java.sql.PreparedStatement;
-
-import util.DatabaseConnector;
 
 import entities.Team;
+import util.DatabaseConnector;
 
 public enum TeamMapper {
 	INSTANCE;

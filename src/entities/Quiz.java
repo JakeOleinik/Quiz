@@ -9,17 +9,40 @@ public class Quiz {
 	private int currentRoundIdx;
 	private String location;
 	private LocalDate date;
+	private Season season;
+	private int id;
+	
+	public Quiz(String location, LocalDate date, Season season) {
+		this.location = location;
+		this.date = date;
+		this.season = season;
+	}
+	
+	public Quiz(int id, String location, LocalDate date, Season season) {
+		this.id = id;
+		this.location = location;
+		this.date = date;
+		this.season = season;
+	}
 
+	public void addRound(Round round) {
+		rounds.add(round);
+	}
+	
+	public void addReport(QuizReport report) {
+		quizReports.add(report);
+	}
+	
+	public QuizReport addTeam(Team team)
+	{
+		return new QuizReport(team, this, season);
+	}
+	
 	public void getNextQuestion() {
 		// TODO - implement Quiz.getNextQuestion
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param team
-	 * @param answer
-	 */
 	public void answerQuestion(Team team, Answer answer) {
 		// TODO - implement Quiz.answerQuestion
 		throw new UnsupportedOperationException();
@@ -29,22 +52,22 @@ public class Quiz {
 		return this.location;
 	}
 
-	/**
-	 * 
-	 * @param location
-	 */
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public LocalDate getDate() {
 		return this.date;
 	}
 
-	/**
-	 * 
-	 * @param date
-	 */
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}

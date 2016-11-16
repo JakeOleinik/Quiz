@@ -74,4 +74,17 @@ public enum GroupMapper {
 		}
 		return group;
 	}
+	
+	public int deleteGroup(Group group) {
+		int rowsAffected = 0;
+		String sql = "DELETE FROM Groups WHERE id = ?";
+		try {
+			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql);
+			prepstat.setInt(1, group.getId());
+			rowsAffected = prepstat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rowsAffected;
+	}
 } 

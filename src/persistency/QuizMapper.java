@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import entities.Quiz;
-import entities.Team;
 import util.DatabaseConnector;
 
 public enum QuizMapper {

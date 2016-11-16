@@ -10,6 +10,7 @@ public class MainProgram {
 	
 	private static Scanner reader = new Scanner(System.in);  // Reading from System.in
 
+	// Supported actions
 	private enum Action {
 			CreatePerson, CreateTeam, CreateGroup,
 			AddPersonToTeam, AddTeamToQuiz

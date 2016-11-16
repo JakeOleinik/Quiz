@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import entities.*;
 
-public class PersonMapperTester {
+public class PersonMapperTest {
 
 	private Person myPerson;
 	private Group myGroup;

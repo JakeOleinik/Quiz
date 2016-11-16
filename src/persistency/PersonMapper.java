@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
-import java.sql.Types;
 
 import entities.*;
 import util.DatabaseConnector;

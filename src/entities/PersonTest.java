@@ -12,10 +12,10 @@ public class PersonTest {
 		assertEquals(testPerson.getEmail(), "test_email@gmail.com");
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void invalidEmailTest() {
 		Person testPerson = new Person();
-		testPerson.setEmail("support.google.com");
+		assertFalse(testPerson.setEmail("support.google.com"));
 	}
 	
 	@Test
@@ -27,9 +27,9 @@ public class PersonTest {
 		assertEquals(testPerson.getLastName(), "Jones");
 	}
 	
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void invalidNameTest() {
 		Person testPerson = new Person();
-		testPerson.setLastName("Abc123");
+		assertFalse(testPerson.setLastName("Abc123"));
 	}
 }

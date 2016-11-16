@@ -36,25 +36,26 @@ public class PersonMapperTester {
 	/*
 	 * Test method for 'persistency.PersonMapper.deletePerson(int)'
 	 */
-//	@Test
-//	public void testDeletePerson() {
-//		int id = PersonMapper.UNIQUEINSTANCE.createPerson(this.myPerson);
-//		assertEquals("Person not deleted",1 , PersonMapper.UNIQUEINSTANCE.deletePerson(id));
-//	}
-//
-//	/*
-//	 * Test method for 'persistency.PersonMapper.updatePerson(Person)'
-//	 */
-//	@Test
-//	public void testUpdatePerson() {
-//		int id = PersonMapper.UNIQUEINSTANCE.createPerson(this.myPerson);
-//		Person testPerson = PersonMapper.UNIQUEINSTANCE.getPersonById(id);
-//		testPerson.setFirstname("Janet");
-//		assertEquals("Update not succeded",1,PersonMapper.UNIQUEINSTANCE.updatePerson(testPerson));
-//		assertEquals("Updated value not changed",
-//				testPerson.getFirstname(),
-//				PersonMapper.UNIQUEINSTANCE.getPersonById(id).getFirstname());
-//		PersonMapper.UNIQUEINSTANCE.deletePerson(id);
-//	}
+	@Test
+	public void testDeletePerson() {
+		int id = PersonMapper.INSTANCE.createPerson(this.myPerson);
+		Person createdPerson = PersonMapper.INSTANCE.getPersonById(id);
+		assertEquals("Person not deleted",1 , PersonMapper.INSTANCE.deletePerson(createdPerson));
+	}
+
+	/*
+	 * Test method for 'persistency.PersonMapper.updatePerson(Person)'
+	 */
+	@Test
+	public void testUpdatePerson() {
+		int id = PersonMapper.INSTANCE.createPerson(this.myPerson);
+		Person testPerson = PersonMapper.INSTANCE.getPersonById(id);
+		testPerson.setFirstName("Janet");
+		assertEquals("Update not succeded",1,PersonMapper.INSTANCE.updatePerson(testPerson));
+		assertEquals("Updated value not changed",
+				testPerson.getFirstName(),
+				PersonMapper.INSTANCE.getPersonById(id).getFirstName());
+		PersonMapper.INSTANCE.deletePerson(testPerson);
+	}
 
 }

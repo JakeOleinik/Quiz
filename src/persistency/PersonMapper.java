@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
+import java.sql.Types;
 
-import entities.Group;
-import entities.Person;
+import entities.*;
 import util.DatabaseConnector;
 
 public enum PersonMapper {
@@ -90,13 +90,18 @@ public enum PersonMapper {
 		int rowsAffected = 0;
 		String sql = "UPDATE People SET lastName = ?, firstName = ?, phone = ?, email = ?, dateOfBirth = ?, groupId = ?, teamId = ? WHERE id = ?";
 		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql)) {
+			Team team = person.getTeam();
+			if (team != null) {
+				pstmt.setInt(7, team.getId());
+			} else {
+				pstmt.setNull(7, 4);
+			}
 			pstmt.setString(1, person.getLastName());
 			pstmt.setString(2, person.getFirstName());
 			pstmt.setString(3, person.getPhone());
 			pstmt.setString(4, person.getEmail());
 			pstmt.setDate(5, Date.valueOf(person.getDateOfBirth()));
 			pstmt.setInt(6, person.getGroup().getId());
-			pstmt.setInt(7, person.getTeam().getId());
 			pstmt.setInt(8, person.getId());
 			 // executeUpdate() should be called to change something in the database
 			rowsAffected = pstmt.executeUpdate();

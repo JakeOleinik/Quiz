@@ -100,7 +100,7 @@ public class Person implements IHasId {
 	}
 	
 	public boolean setDateOfBirthFromString(String dob) {
-		String pattern = "dd-MM-yyyy";
+		String pattern = "yyyy-MM-dd";
 		try {
 			this.setDateOfBirth(Helpers.StringToDate(dob));
 		} catch (Exception e) {

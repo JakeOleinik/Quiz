@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
+import entities.Group;
 import entities.Person;
 import util.DatabaseConnector;
 
@@ -65,7 +66,7 @@ public enum PersonMapper {
 	 * @return Number of rows affected (should be 1)
 	 * @throws SQLException
 	 */
-	public int deletePerson(Person person) throws SQLException {
+	public int deletePerson(Person person) {
 		int rowsAffected = 0;
 		String sql = "DELETE FROM People WHERE id = ?";
 		try {
@@ -113,7 +114,7 @@ public enum PersonMapper {
 			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(select);
 			prepstat.setInt(1, groupId);
 			ResultSet rset = prepstat.executeQuery();
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			
 			while (rset.next()) {
 				people.add(new Person(
@@ -134,6 +135,36 @@ public enum PersonMapper {
 			e.printStackTrace();
 		}
 		return people;
+	}
+	
+	public Person getPersonById(int personId) {
+		String select = "SELECT id, lastName, firstName, phone, email, dateOfBirth, groupId FROM People WHERE id = ?";
+		Person person = null;
+		try {
+			
+			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(select);
+			prepstat.setInt(1, personId);
+			ResultSet rset = prepstat.executeQuery();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			
+			if (rset.next()) {
+				person = new Person(
+									rset.getInt("id"),
+									rset.getString("lastName"),
+									rset.getString("firstName"),
+									rset.getString("phone"),
+									rset.getString("email"),
+									formatter.format(rset.getDate("dateOfBirth").toLocalDate()),
+									GroupMapper.INSTANCE.getGroupById(rset.getInt("groupId"))
+				); 
+			}
+			rset.close();
+			prepstat.close();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return person;
 	}
 	
 	

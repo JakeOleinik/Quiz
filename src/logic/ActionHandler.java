@@ -6,9 +6,13 @@ import java.util.Scanner;
 import entities.Group;
 import entities.IHasId;
 import entities.Person;
+import entities.Quiz;
+import entities.QuizReport;
 import entities.Team;
 import persistency.GroupMapper;
 import persistency.PersonMapper;
+import persistency.QuizMapper;
+import persistency.QuizReportMapper;
 import persistency.TeamMapper;
 
 public class ActionHandler {
@@ -135,5 +139,41 @@ public class ActionHandler {
 			return;
 		}
 		System.out.println("Successfully assigned "+person.getFirstName()+" to team "+team.getName());
+	}
+	
+	public static void addTeamToQuiz() {
+		List<Team> teams;
+		List<Quiz> quizzes;
+		int teamId;
+		int quizId;
+		do {
+			System.out.println("Available teams: ");
+			teams = TeamMapper.INSTANCE.getTeams();
+			System.out.println(teams);
+			System.out.print("Choose a team id: ");
+			teamId = reader.nextInt();
+		} while (!existsInQueryResult(teams, teamId));
+		final int finalTeamId = teamId;
+		Team team = teams.stream().filter(x -> x.getId() == finalTeamId).findFirst().get();
+		
+		do {
+			System.out.println("Available quizzes: ");
+			quizzes = QuizMapper.INSTANCE.getQuizzes();
+			System.out.println(quizzes);
+			System.out.print("Choose a quiz id: ");
+			quizId = reader.nextInt();
+		} while (!existsInQueryResult(quizzes, quizId));
+		final int finalPersonId = quizId;
+		Quiz quiz = quizzes.stream().filter(x -> x.getId() == finalPersonId).findFirst().get();
+		
+		QuizReport quizReport = new QuizReport(team, quiz);
+		int rowsAffected = QuizReportMapper.INSTANCE.createQuizReport(quizReport);
+
+		if (rowsAffected!=1) {
+			System.out.println("Failed to add team to quiz");
+			return;
+		}
+		System.out.println("Successfully signed up " + team.getName() + " to quiz at " 
+		+ quiz.getLocation() + " on " + quiz.getDate().toString());
 	}
 }

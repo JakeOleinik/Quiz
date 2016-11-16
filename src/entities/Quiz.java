@@ -1,9 +1,12 @@
 package entities;
 
 import java.util.*;
+
+import util.Helpers;
+
 import java.time.LocalDate;
 
-public class Quiz {
+public class Quiz implements IHasId {
 	private Collection<Round> rounds;
 	private Collection<QuizReport> quizReports;
 	private int currentRoundIdx;
@@ -23,6 +26,13 @@ public class Quiz {
 		this.location = location;
 		this.date = date;
 		this.season = season;
+	}
+	
+	public Quiz(int id, String location, String date) {
+		this.id = id;
+		this.location = location;
+		this.date = Helpers.StringToDate(date);
+		//this.season = season;
 	}
 
 	public void addRound(Round round) {
@@ -72,4 +82,7 @@ public class Quiz {
 		this.date = date;
 	}
 
+	public String toString() {
+		return "" + this.id + ": @" + this.location + " on " + this.date.toString();
+	}
 }

@@ -15,17 +15,21 @@ public enum QuizReportMapper {
 		
 	}
 	
-	public void createQuizReport(QuizReport quizReport)
-	{		
-		String sql = "INSERT INTO QuizReports (quizId, teamId, seasonId, roundScores) VALUES (?,?,?,?)";
+	public int createQuizReport(QuizReport quizReport)
+	{
+		int rowsAffected = 0;
+		String sql = "INSERT INTO QuizReports (quizId, teamId, seasonId) VALUES (?,?,?)";
 		try (PreparedStatement pstmt = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 			pstmt.setInt(1, quizReport.getQuiz().getId());
 			pstmt.setInt(2, quizReport.getTeam().getId());
-			pstmt.setInt(3, quizReport.getSeason().getId());
-			pstmt.setString(4, arrayToCsv(quizReport.getRoundScores()));			
+			// pstmt.setInt(3, quizReport.getSeason().getId());
+			pstmt.setInt(3, 1);
+			// pstmt.setString(4, arrayToCsv(quizReport.getRoundScores()));	
+			rowsAffected = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return rowsAffected;
 	}
 	
 	public int updateQuizReport(QuizReport quizReport) {
@@ -44,8 +48,7 @@ public enum QuizReportMapper {
 	}
 	
 	
-	private String arrayToCsv(ArrayList<Integer> input)
-	{
+	private String arrayToCsv(ArrayList<Integer> input) {
 		String result = "";
 		for (int in : input)
 		{
@@ -55,8 +58,7 @@ public enum QuizReportMapper {
 		return result.substring(0, result.length() - 1);
 	}
 	
-	private ArrayList<Integer> csvToArray(String input)
-	{
+	private ArrayList<Integer> csvToArray(String input) {
 		ArrayList<Integer> out = new ArrayList<Integer>();
 		for(String s : input.split("\\s*,\\s*"))
 		{

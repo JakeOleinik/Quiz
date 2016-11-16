@@ -46,7 +46,7 @@ public class MainProgram {
 				break;
 				
 			case AddTeamToQuiz:
-				
+				ActionHandler.addTeamToQuiz();
 				break;
 			
 			default:

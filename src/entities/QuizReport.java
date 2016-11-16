@@ -14,6 +14,11 @@ public class QuizReport {
 		this.season = season;
 		season.addQuizReport(this);
 	}
+	
+	public QuizReport(Team team, Quiz quiz) {
+		this.team = team;
+		this.quiz = quiz;
+	}
 
 	public int getTotalScore() {
 		int sum = 0;

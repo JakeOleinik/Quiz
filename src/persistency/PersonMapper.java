@@ -1,15 +1,14 @@
 package persistency;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.format.DateTimeFormatter;
-import java.sql.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import entities.Group;
 import entities.Person;
 import util.DatabaseConnector;
 

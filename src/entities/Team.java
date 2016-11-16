@@ -43,12 +43,19 @@ public class Team implements IHasId {
 		return this.id;
 	}
 
-	public ArrayList<Person> getMembers() {
-		// TODO - implement Team.getMembers
-		throw new UnsupportedOperationException();
+	public void addMember(Person member) {
+		this.members.add(member);
+	}
+	
+	public Collection<Person> getMembers() {
+		return members;
 	}
 	
 	public String toString() {
 		return "" + this.id + ": " + this.name;
+	}
+
+	public Collection<QuizReport> getQuizReports() {
+		return quizReports;
 	}
 }

@@ -16,7 +16,7 @@ public class GroupMapperTest {
 	}
 	
 	@Test
-	public void testCreatePerson() {
+	public void testCreateGroup() {
 		int id = GroupMapper.INSTANCE.createGroup(this.myGroup);
 		Group createdGroup = GroupMapper.INSTANCE.getGroupById(id);
 		assertEquals("No consistent ID's when creating a group", id,
@@ -25,7 +25,7 @@ public class GroupMapperTest {
 	}
 	
 	@Test
-	public void testDeletePerson() {
+	public void testDeleteGroup() {
 		int id = GroupMapper.INSTANCE.createGroup(this.myGroup);
 		Group createdGroup = GroupMapper.INSTANCE.getGroupById(id);
 		assertEquals("Group not deleted",1 , GroupMapper.INSTANCE.deleteGroup(createdGroup));

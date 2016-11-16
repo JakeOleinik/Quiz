@@ -173,7 +173,7 @@ public class ActionHandler {
 			System.out.println("Failed to add team to quiz");
 			return;
 		}
-		System.out.println("Successfully signed up " + team.getName() + " to quiz at " 
-		+ quiz.getLocation() + " on " + quiz.getDate().toString());
+		System.out.println("Successfully signed up " + team.getName() + " to quiz: " + quiz.getName() + 
+		" at " + quiz.getLocation() + " on " + quiz.getDate().toString());
 	}
 }

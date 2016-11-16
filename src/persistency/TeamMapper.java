@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
+import entities.Group;
+import entities.Person;
 import entities.Team;
 import util.DatabaseConnector;
 
@@ -55,5 +58,43 @@ public enum TeamMapper {
 			e.printStackTrace();
 		}
 		return teams;
+	}
+	
+	public Team getTeamById(int teamId) {
+		String select = "SELECT id, name, groupId FROM Teams WHERE id = ?";
+		Team team = null;
+		try {
+			
+			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(select);
+			prepstat.setInt(1, teamId);
+			ResultSet rset = prepstat.executeQuery();
+			
+			if (rset.next()) {
+				team = new Team(
+								rset.getInt("id"),
+								rset.getString("name"),
+								GroupMapper.INSTANCE.getGroupById(rset.getInt("groupId"))
+				); 
+			}
+			rset.close();
+			prepstat.close();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return team;
+	}
+	
+	public int deleteTeam(Team team) {
+		int rowsAffected = 0;
+		String sql = "DELETE FROM Teams WHERE id = ?";
+		try {
+			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql);
+			prepstat.setInt(1, team.getId());
+			rowsAffected = prepstat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rowsAffected;
 	}
 }

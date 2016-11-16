@@ -10,26 +10,30 @@ public class Quiz implements IHasId {
 	private Collection<Round> rounds;
 	private Collection<QuizReport> quizReports;
 	private int currentRoundIdx;
+	private String name;
 	private String location;
 	private LocalDate date;
 	private Season season;
 	private int id;
 	
-	public Quiz(String location, LocalDate date, Season season) {
+	public Quiz(String location, String name, LocalDate date, Season season) {
+		this.location = location;
+		this.name = name;
+		this.date = date;
+		this.season = season;
+	}
+	
+	public Quiz(int id, String name, String location, LocalDate date, Season season) {
+		this.id = id;
+		this.name = name;
 		this.location = location;
 		this.date = date;
 		this.season = season;
 	}
 	
-	public Quiz(int id, String location, LocalDate date, Season season) {
+	public Quiz(int id, String name, String location, String date) {
 		this.id = id;
-		this.location = location;
-		this.date = date;
-		this.season = season;
-	}
-	
-	public Quiz(int id, String location, String date) {
-		this.id = id;
+		this.name = name;
 		this.location = location;
 		this.date = Helpers.StringToDate(date);
 		//this.season = season;
@@ -73,6 +77,14 @@ public class Quiz implements IHasId {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public LocalDate getDate() {
 		return this.date;
@@ -83,6 +95,6 @@ public class Quiz implements IHasId {
 	}
 
 	public String toString() {
-		return "" + this.id + ": @" + this.location + " on " + this.date.toString();
+		return "" + this.id + ": " + this.name + " @ " + this.location + " on " + this.date.toString();
 	}
 }

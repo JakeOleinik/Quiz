@@ -1,10 +1,12 @@
 package persistency;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import entities.Group;
 import entities.QuizReport;
 import util.DatabaseConnector;
 
@@ -47,6 +49,19 @@ public enum QuizReportMapper {
 		return rowsAffected;
 	}
 	
+	public int deleteQuizReport(QuizReport quizReport) {
+		int rowsAffected = 0;
+		String sql = "DELETE FROM QuizReports WHERE quizId = ? AND teamId = ?";
+		try {
+			PreparedStatement prepstat = DatabaseConnector.INSTANCE.getConnection().prepareStatement(sql);
+			prepstat.setInt(1, quizReport.getQuiz().getId());
+			prepstat.setInt(2, quizReport.getTeam().getId());
+			rowsAffected = prepstat.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rowsAffected;
+	}
 	
 	private String arrayToCsv(ArrayList<Integer> input) {
 		String result = "";
